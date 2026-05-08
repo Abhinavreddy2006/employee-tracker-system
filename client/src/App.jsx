@@ -1,10 +1,17 @@
+import LoginPage from "./pages/LoginPage";
 import EmployeePage from "./pages/EmployeePage";
 
 function App() {
 
+  const token = localStorage.getItem("token");
+
   return (
     <div>
-      <EmployeePage />
+
+      {
+        token ? <EmployeePage /> : <LoginPage />
+      }
+
     </div>
   );
 }

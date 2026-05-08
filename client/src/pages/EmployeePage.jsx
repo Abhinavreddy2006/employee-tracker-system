@@ -11,7 +11,13 @@ function EmployeePage() {
   // FETCH EMPLOYEES
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/employees");
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get("http://localhost:5000/api/employees", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setEmployees(response.data);
     } catch (error) {
@@ -24,11 +30,21 @@ function EmployeePage() {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/employees", {
-        name,
-        email,
-        position,
-      });
+      const token = localStorage.getItem("token");
+
+      await axios.post(
+        "http://localhost:5000/api/employees",
+        {
+          name,
+          email,
+          position,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
 
       fetchEmployees();
 
@@ -42,7 +58,13 @@ function EmployeePage() {
 
   const deleteEmployee = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/employees/${id}`);
+      const token = localStorage.getItem("token");
+
+      await axios.delete(`http://localhost:5000/api/employees/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       fetchEmployees();
     } catch (error) {
@@ -53,6 +75,12 @@ function EmployeePage() {
   useEffect(() => {
     fetchEmployees();
   }, []);
+  
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+
+    window.location.reload();
+  };
 
   return (
     <div>
@@ -94,6 +122,8 @@ function EmployeePage() {
       </form>
 
       <hr />
+
+      <button onClick={logoutHandler}>Logout</button>
 
       {/* EMPLOYEE LIST */}
       <h2>Employee List</h2>
