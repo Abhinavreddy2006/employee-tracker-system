@@ -1,5 +1,8 @@
 import express from "express";
-import { protect } from "../middleware/authMiddleware.js";
+import {
+    protect,
+    adminOnly,
+} from "../middleware/authMiddleware.js";
 
 import {
     createEmployee,
@@ -10,10 +13,10 @@ import {
 const router = express.Router();
 
 router.route("/")
-    .post(protect, createEmployee)
-    .get(protect, getEmployees);
+    .post(protect, adminOnly, createEmployee)
+    .get(protect, adminOnly, getEmployees);
 
 router.route("/:id")
-    .delete(protect, deleteEmployee);
+    .delete(protect, adminOnly, deleteEmployee);
 
 export default router;
