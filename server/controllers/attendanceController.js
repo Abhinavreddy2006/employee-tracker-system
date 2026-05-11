@@ -71,7 +71,28 @@ const getMyAttendance = async (req, res) => {
     }
 };
 
+const getAttendanceStats = async (req, res) => {
+
+    try {
+
+        const totalAttendance =
+            await Attendance.countDocuments();
+
+        res.status(200).json({
+            totalAttendance,
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message,
+        });
+
+    }
+};
+
 export {
     markAttendance,
     getMyAttendance,
+    getAttendanceStats,
 };

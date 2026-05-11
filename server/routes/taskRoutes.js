@@ -4,6 +4,7 @@ import {
     createTask,
     getMyTasks,
     updateTaskStatus,
+    getTaskStats,
 } from "../controllers/taskController.js";
 
 import {
@@ -36,6 +37,13 @@ router.patch(
     "/:id",
     protect,
     updateTaskStatus
+);
+
+router.get(
+    "/stats",
+    protect,
+    adminOnly,
+    getTaskStats
 );
 
 export default router;

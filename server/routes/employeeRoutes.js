@@ -8,6 +8,7 @@ import {
     createEmployee,
     getEmployees,
     deleteEmployee,
+    getEmployeeStats,
 } from "../controllers/employeeController.js";
 
 const router = express.Router();
@@ -18,5 +19,12 @@ router.route("/")
 
 router.route("/:id")
     .delete(protect, adminOnly, deleteEmployee);
+
+router.get(
+    "/stats",
+    protect,
+    adminOnly,
+    getEmployeeStats
+);
 
 export default router;

@@ -73,9 +73,29 @@ const deleteEmployee = async (req, res) => {
     }
 };
 
+const getEmployeeStats = async (req, res) => {
+
+    try {
+
+        const totalEmployees =
+            await Employee.countDocuments();
+
+        res.status(200).json({
+            totalEmployees,
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message,
+        });
+
+    }
+};
 
 export {
     createEmployee,
     getEmployees,
     deleteEmployee,
+    getEmployeeStats,
 };

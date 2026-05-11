@@ -55,4 +55,49 @@ const updateTaskStatus = async (req, res) => {
   }
 };
 
-export { createTask, getMyTasks, updateTaskStatus };
+const getTaskStats = async (req, res) => {
+
+    try {
+
+        const totalTasks =
+            await Task.countDocuments();
+
+        const completedTasks =
+            await Task.countDocuments({
+                status: "Completed",
+            });
+
+        const pendingTasks =
+            await Task.countDocuments({
+                status: "Pending",
+            });
+
+        const inProgressTasks =
+            await Task.countDocuments({
+                status: "In Progress",
+            });
+
+
+
+        res.status(200).json({
+            totalTasks,
+            completedTasks,
+            pendingTasks,
+            inProgressTasks,
+        });
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message,
+        });
+
+    }
+};
+
+export {
+    createTask,
+    getMyTasks,
+    updateTaskStatus,
+    getTaskStats,
+};
