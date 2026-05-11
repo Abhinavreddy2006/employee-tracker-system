@@ -4,6 +4,8 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import DashboardCard from "../components/DashboardCard";
+import AnalyticsChart from "../components/AnalyticsChart";
+import EmployeeTable from "../components/EmployeeTable";
 
 function AdminDashboard() {
   const [stats, setStats] = useState({});
@@ -11,6 +13,21 @@ function AdminDashboard() {
   const [employeeStats, setEmployeeStats] = useState({});
 
   const [attendanceStats, setAttendanceStats] = useState({});
+
+  const [employees, setEmployees]
+    = useState([]);
+
+    const [search, setSearch]
+    = useState("");
+
+
+    const filteredEmployees =
+    employees.filter((employee) =>
+        employee.name
+            .toLowerCase()
+            .includes(search.toLowerCase())
+    );
+
 
   const fetchStats = async () => {
     try {
@@ -69,33 +86,56 @@ function AdminDashboard() {
     }
   };
 
+  const fetchEmployees = async () => {
+
+    try {
+
+        const userInfo = JSON.parse(
+            localStorage.getItem("userInfo")
+        );
+
+
+
+        const response = await axios.get(
+            "http://localhost:5000/api/employees",
+            {
+                headers: {
+                    Authorization:
+                        `Bearer ${userInfo.token}`,
+                },
+            }
+        );
+
+
+
+        setEmployees(response.data);
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+};
+
+
   useEffect(() => {
     fetchStats();
 
     fetchEmployeeStats();
 
     fetchAttendanceStats();
+
+    fetchEmployees();
   }, []);
 
   return (
-    <div>
+    <div className="bg-slate-100 min-h-screen">
       <Navbar />
 
-      <div
-        style={{
-          display: "flex",
-        }}
-      >
+      <div className="flex">
         <Sidebar />
 
-        <div
-          style={{
-            padding: "20px",
-            display: "flex",
-            gap: "20px",
-            flexWrap: "wrap",
-          }}
-        >
+        <div className="p-8 flex gap-6 flex-wrap">
           <DashboardCard title="Total Tasks" value={stats.totalTasks} />
 
           <DashboardCard title="Completed Tasks" value={stats.completedTasks} />
@@ -113,6 +153,28 @@ function AdminDashboard() {
             title="Attendance Records"
             value={attendanceStats.totalAttendance}
           />
+
+          <div className="w-full">
+            <AnalyticsChart stats={stats} />
+
+            <div className="w-full">
+
+              <input
+    type="text"
+    placeholder="Search Employee"
+    value={search}
+    onChange={(e) =>
+        setSearch(e.target.value)
+    }
+    className="border p-3 rounded mb-4 w-full"
+/>
+
+    <EmployeeTable
+        employees={filteredEmployees}
+    />
+
+</div>
+          </div>
         </div>
       </div>
     </div>

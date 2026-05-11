@@ -1,23 +1,29 @@
 function Sidebar() {
 
     return (
-        <div
-            style={{
-                width: "200px",
-                minHeight: "100vh",
-                backgroundColor: "#333",
-                color: "white",
-                padding: "20px",
-            }}
-        >
+        <div className="w-64 min-h-screen bg-slate-800 text-white p-6">
 
-            <h3>Dashboard</h3>
+            <h2 className="text-2xl font-bold mb-8">
+                Dashboard
+            </h2>
 
-            <p>Tasks</p>
 
-            <p>Attendance</p>
 
-            <p>Employees</p>
+            <div className="space-y-4">
+
+                <p className="hover:text-blue-400 cursor-pointer">
+                    Tasks
+                </p>
+
+                <p className="hover:text-blue-400 cursor-pointer">
+                    Attendance
+                </p>
+
+                <p className="hover:text-blue-400 cursor-pointer">
+                    Employees
+                </p>
+
+            </div>
 
         </div>
     );

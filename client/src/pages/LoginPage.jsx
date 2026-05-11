@@ -25,35 +25,51 @@ function LoginPage() {
     }
   };
 
-  return (
-    <div>
-      <h1>Login Page</h1>
+return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-100">
 
-      <form onSubmit={loginHandler}>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <form
+            onSubmit={loginHandler}
+            className="bg-white p-8 rounded-xl shadow-md w-96"
+        >
 
-        <br />
-        <br />
+            <h1 className="text-3xl font-bold mb-6 text-center">
+                Login
+            </h1>
 
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
 
-        <br />
-        <br />
 
-        <button type="submit">Login</button>
-      </form>
+            <input
+                type="email"
+                placeholder="Enter Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full border p-3 rounded mb-4"
+            />
+
+
+
+            <input
+                type="password"
+                placeholder="Enter Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full border p-3 rounded mb-4"
+            />
+
+
+
+            <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600"
+            >
+                Login
+            </button>
+
+        </form>
+
     </div>
-  );
+);
 }
 
 export default LoginPage;

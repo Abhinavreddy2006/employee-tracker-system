@@ -10,21 +10,18 @@ function Navbar() {
 
 
     return (
-        <div
-            style={{
-                backgroundColor: "#222",
-                color: "white",
-                padding: "15px",
-                display: "flex",
-                justifyContent: "space-between",
-            }}
-        >
+        <div className="bg-slate-900 text-white px-8 py-4 flex justify-between items-center shadow-md">
 
-            <h2>Employee Tracker System</h2>
+            <h1 className="text-2xl font-bold">
+                Employee Tracker
+            </h1>
 
 
 
-            <button onClick={logoutHandler}>
+            <button
+                onClick={logoutHandler}
+                className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
+            >
                 Logout
             </button>
 
