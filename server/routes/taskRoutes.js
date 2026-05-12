@@ -4,6 +4,7 @@ import {
     createTask,
     getMyTasks,
     updateTaskStatus,
+    getProductivityScore,
     getTaskStats,
 } from "../controllers/taskController.js";
 
@@ -44,6 +45,12 @@ router.get(
     protect,
     adminOnly,
     getTaskStats
+);
+
+router.get(
+    "/productivity",
+    protect,
+    getProductivityScore
 );
 
 export default router;

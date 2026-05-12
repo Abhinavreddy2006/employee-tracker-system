@@ -4,16 +4,20 @@ function DashboardCard({
 }) {
 
     return (
-        <div className="bg-white p-6 rounded-xl shadow-md w-64">
+        <div className="bg-white p-7 rounded-2xl shadow-sm hover:shadow-lg transition w-72">
 
-            <h3 className="text-gray-500 text-lg">
+            <p className="text-gray-500 text-lg">
+
                 {title}
-            </h3>
+
+            </p>
 
 
 
-            <h1 className="text-4xl font-bold mt-4">
+            <h1 className="text-5xl font-bold mt-5 text-slate-800">
+
                 {value}
+
             </h1>
 
         </div>

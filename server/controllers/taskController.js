@@ -3,13 +3,21 @@ import Task from "../models/taskModel.js";
 // CREATE TASK
 const createTask = async (req, res) => {
   try {
-    const { title, description, assignedTo } = req.body;
+    const {
+    title,
+    description,
+    assignedTo,
+    priority,
+    deadline,
+} = req.body;
 
-    const task = await Task.create({
-      title,
-      description,
-      assignedTo,
-    });
+const task = await Task.create({
+    title,
+    description,
+    assignedTo,
+    priority,
+    deadline,
+});
 
     res.status(201).json(task);
   } catch (error) {
@@ -53,6 +61,56 @@ const updateTaskStatus = async (req, res) => {
       message: error.message,
     });
   }
+};
+
+const getProductivityScore =
+    async (req, res) => {
+
+        try {
+
+            const completedTasks =
+                await Task.countDocuments({
+                    assignedTo: req.user._id,
+                    status: "Completed",
+                });
+
+
+
+
+            const totalTasks =
+                await Task.countDocuments({
+                    assignedTo: req.user._id,
+                });
+
+
+
+
+            const productivity =
+                totalTasks === 0
+                    ? 0
+                    : Math.round(
+                        (
+                            completedTasks /
+                            totalTasks
+                        ) * 100
+                    );
+
+
+
+
+            res.status(200).json({
+                productivity,
+                completedTasks,
+                totalTasks,
+            });
+
+        } catch (error) {
+
+            res.status(500).json({
+                message: error.message,
+            });
+
+        }
 };
 
 const getTaskStats = async (req, res) => {
@@ -99,5 +157,6 @@ export {
     createTask,
     getMyTasks,
     updateTaskStatus,
+    getProductivityScore,
     getTaskStats,
 };

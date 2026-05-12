@@ -6,6 +6,7 @@ import Sidebar from "../components/Sidebar";
 import DashboardCard from "../components/DashboardCard";
 import AnalyticsChart from "../components/AnalyticsChart";
 import EmployeeTable from "../components/EmployeeTable";
+import DashboardLayout from "../components/DashboardLayout";
 
 function AdminDashboard() {
   const [stats, setStats] = useState({});
@@ -128,57 +129,103 @@ function AdminDashboard() {
     fetchEmployees();
   }, []);
 
-  return (
-    <div className="bg-slate-100 min-h-screen">
-      <Navbar />
+return (
+    <DashboardLayout>
 
-      <div className="flex">
-        <Sidebar />
+        <div className="space-y-8">
 
-        <div className="p-8 flex gap-6 flex-wrap">
-          <DashboardCard title="Total Tasks" value={stats.totalTasks} />
+            <div>
 
-          <DashboardCard title="Completed Tasks" value={stats.completedTasks} />
+                <h1 className="text-4xl font-bold text-slate-800">
 
-          <DashboardCard title="Pending Tasks" value={stats.pendingTasks} />
+                    Admin Dashboard
 
-          <DashboardCard title="In Progress" value={stats.inProgressTasks} />
+                </h1>
 
-          <DashboardCard
-            title="Total Employees"
-            value={employeeStats.totalEmployees}
-          />
+                <p className="text-gray-500 mt-2">
 
-          <DashboardCard
-            title="Attendance Records"
-            value={attendanceStats.totalAttendance}
-          />
+                    Monitor productivity and manage employees
 
-          <div className="w-full">
+                </p>
+
+            </div>
+
+
+
+            <div className="flex gap-6 flex-wrap">
+
+                <DashboardCard
+                    title="Total Tasks"
+                    value={stats.totalTasks}
+                />
+
+
+
+                <DashboardCard
+                    title="Completed Tasks"
+                    value={stats.completedTasks}
+                />
+
+
+
+                <DashboardCard
+                    title="Pending Tasks"
+                    value={stats.pendingTasks}
+                />
+
+
+
+                <DashboardCard
+                    title="In Progress"
+                    value={stats.inProgressTasks}
+                />
+
+
+
+                <DashboardCard
+                    title="Total Employees"
+                    value={employeeStats.totalEmployees}
+                />
+
+
+
+                <DashboardCard
+                    title="Attendance Records"
+                    value={attendanceStats.totalAttendance}
+                />
+
+            </div>
+
+
+
             <AnalyticsChart stats={stats} />
 
-            <div className="w-full">
 
-              <input
-    type="text"
-    placeholder="Search Employee"
-    value={search}
-    onChange={(e) =>
-        setSearch(e.target.value)
-    }
-    className="border p-3 rounded mb-4 w-full"
-/>
 
-    <EmployeeTable
-        employees={filteredEmployees}
-    />
+            <div>
 
-</div>
-          </div>
+                <input
+                    type="text"
+                    placeholder="Search Employee"
+                    value={search}
+                    onChange={(e) =>
+                        setSearch(e.target.value)
+                    }
+                    className="w-full p-4 rounded-xl border mb-6"
+                />
+
+
+
+                <EmployeeTable
+                    employees={filteredEmployees}
+                />
+
+            </div>
+
         </div>
-      </div>
-    </div>
-  );
+
+    </DashboardLayout>
+);
 }
 
 export default AdminDashboard;

@@ -1,5 +1,11 @@
 function Navbar() {
 
+    const userInfo = JSON.parse(
+        localStorage.getItem("userInfo")
+    );
+
+
+
     const logoutHandler = () => {
 
         localStorage.removeItem("userInfo");
@@ -10,17 +16,31 @@ function Navbar() {
 
 
     return (
-        <div className="bg-slate-900 text-white px-8 py-4 flex justify-between items-center shadow-md">
+        <div className="bg-white shadow-sm px-8 py-5 flex justify-between items-center">
 
-            <h1 className="text-2xl font-bold">
-                Employee Tracker
-            </h1>
+            <div>
+
+                <h1 className="text-2xl font-bold text-slate-800">
+
+                    Welcome,
+                    {" "}
+                    {userInfo?.name}
+
+                </h1>
+
+                <p className="text-gray-500">
+
+                    Manage your team's workflow
+
+                </p>
+
+            </div>
 
 
 
             <button
                 onClick={logoutHandler}
-                className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
+                className="bg-red-500 text-white px-5 py-2 rounded-lg hover:bg-red-600 transition"
             >
                 Logout
             </button>

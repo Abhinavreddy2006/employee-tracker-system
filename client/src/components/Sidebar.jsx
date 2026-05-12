@@ -1,27 +1,45 @@
 function Sidebar() {
 
     return (
-        <div className="w-64 min-h-screen bg-slate-800 text-white p-6">
+        <div className="w-72 min-h-screen bg-slate-900 text-white p-6">
 
-            <h2 className="text-2xl font-bold mb-8">
-                Dashboard
+            <h2 className="text-3xl font-bold mb-10">
+                WorkSphere
             </h2>
 
 
 
-            <div className="space-y-4">
+            <div className="space-y-3">
 
-                <p className="hover:text-blue-400 cursor-pointer">
-                    Tasks
-                </p>
+                <div className="bg-slate-800 p-4 rounded-lg cursor-pointer hover:bg-blue-500 transition">
 
-                <p className="hover:text-blue-400 cursor-pointer">
-                    Attendance
-                </p>
+                    Dashboard
 
-                <p className="hover:text-blue-400 cursor-pointer">
+                </div>
+
+
+
+                <div className="p-4 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+
                     Employees
-                </p>
+
+                </div>
+
+
+
+                <div className="p-4 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+
+                    Tasks
+
+                </div>
+
+
+
+                <div className="p-4 rounded-lg cursor-pointer hover:bg-slate-800 transition">
+
+                    Attendance
+
+                </div>
 
             </div>
 
